@@ -1,5 +1,10 @@
 package adapters.entity;
 
+import android.graphics.Point;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hp on 22/05/2018.
  */
@@ -9,9 +14,9 @@ public class Eleve {
     public  String surName;
     public  String description;
     public  String immatricul;
+    List<Pointage> listPointage;
 
-
-    Eleve(String name, String surName, String description, String immatricul)
+    public Eleve(String name, String surName, String description, String immatricul)
     {
         this.name = name;
         this.surName = surName;
@@ -28,7 +33,18 @@ public class Eleve {
     public String getListName()
     {
         String listName = name + " " + surName + " " + immatricul;
-        return listName.substring(0, 20) + "...";
+        int tailleLimit = 20;
+        if(listName.length() > tailleLimit)
+        return listName.substring(0, tailleLimit) + "...";
+
+        return  listName;
+    }
+
+    public void generatePointage()
+    {
+        listPointage = new ArrayList<Pointage>();
+
+
     }
 }
 

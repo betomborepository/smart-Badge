@@ -9,14 +9,25 @@ import android.view.ViewGroup;
 
 
 import com.smart.badge.R;
+
+import adapters.Pointage_VAdapter;
+import service.DataCore;
+
 /**
  * Created by hp on 21/05/2018.
  */
 
-public class Pointage extends Fragment {
-    @Nullable
+public class Pointage extends ListBase {
+    Pointage_VAdapter pointage_vAdapter;
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.pointage, container, false);
+    protected void refresh_list() {
+        //generating 16 profiles data ( with 5 actives)
+
+
+        // putting the profile data to the adapter
+        pointage_vAdapter = new Pointage_VAdapter(DataCore.GetListPointage(), this.getActivity());
+
+        //attaching data from the adapter to the real recyclerview
+        recyclerView.setAdapter(pointage_vAdapter);
     }
 }

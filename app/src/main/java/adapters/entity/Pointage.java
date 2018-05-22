@@ -10,15 +10,17 @@ public class Pointage {
     public String ID;
     public String poste;
     public String date;
+    public String nomEleve;
+    public  String IDEleve;
 
 
-
-
-    public Pointage(String id, String poste, Date date)
+    public Pointage(String id, String poste, String nomEleve, String IDEleve )
     {
         this.ID = id;
         this.poste = poste;
-        this.setDate(date);
+        this.setDate(new Date());
+        this.nomEleve =nomEleve;
+        this.IDEleve = IDEleve;
     }
 
 

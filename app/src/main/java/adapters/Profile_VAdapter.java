@@ -2,6 +2,8 @@ package adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import java.util.List;
 
 public class Profile_VAdapter extends RecyclerView.Adapter<Profile_VHolder> {
 
+    AppCompatImageView profile_ic, profile_active_ic;
+    AppCompatTextView profile_name, profile_detail, profile_active_time;
 
     private List<Profile> list = Collections.emptyList();
     private Context context;
