@@ -41,8 +41,10 @@ public class Eleve_VAdapter extends RecyclerView.Adapter<Eleve_VHolder>
     public void onBindViewHolder(@NonNull Eleve_VHolder holder, int position) {
         Eleve el = getEleve(position);
 
+        holder.itemView.setTag(el);
         holder.eleve_name.setText(el.getListName());
         holder.eleve_detail.setText(el.shortDescription());
+        holder.eleve_name.setTag(el);
         // populate the view holder
     }
 

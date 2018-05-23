@@ -1,8 +1,10 @@
 package service;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,10 +27,12 @@ public  class DataCore
     private DatabaseReference mDatabase;
 // ...
 
-    public  List<Eleve> GetListEleve()
+
+    public  List<Eleve> GetListEleve(Context context)
     {
+        FirebaseApp.initializeApp(context);
         final List<Eleve>  listEleve = new ArrayList<Eleve>() ;
-        mDatabase = FirebaseDatabase.getInstance().getReference("eleves").child("listeleve");
+       mDatabase = FirebaseDatabase.getInstance().getReference("eleves").child("listeleve");
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -83,5 +87,10 @@ public  class DataCore
     public static Eleve GetEleveByImmatricule(String id)
     {
         return new Eleve("BETOMBO", "Mariot", "On a fini le projet", "15612541");
+    }
+
+    public  static void updatePointageEleve(Pointage p)
+    {
+
     }
 }

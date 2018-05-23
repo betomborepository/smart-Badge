@@ -3,7 +3,6 @@ package com.smart.badge;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Point;
 import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,19 +14,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import adapters.entity.Pointage;
 import service.DataCore;
 import service.NFCCore;
 
 
-public class NFCPointer extends AppCompatActivity {
+public class NFCLoginIdentifiant extends AppCompatActivity {
 
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nfcpointer);
+        setContentView(R.layout.activity_nfclogin_identifiant);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -35,7 +33,6 @@ public class NFCPointer extends AppCompatActivity {
 
 
     }
-
 
 
     @Override
@@ -75,31 +72,20 @@ public class NFCPointer extends AppCompatActivity {
             Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
             String nfcVal = NFCCore.getNFCFirstRecordValue(intent);
 
-            pointerUnEleve(nfcVal);
+
+            Connecter(nfcVal);
         }
     }
 
-    public void pointerUnEleve(String id)
+    public void Connecter(String id)
     {
-        if (id.isEmpty())
-            error();
-
-
-        adapters.entity.Eleve el = DataCore.GetEleveByImmatricule(id);
-
-        Pointage p = new Pointage("testid","poste 777", el.shortDescription(), el.immatricul );
-        DataCore.updatePointageEleve( p);
-
-        Intent intent = new Intent(NFCPointer.this, MainActivity.class);
-
-        startActivity(intent);
-
+         startActivity(new Intent(NFCLoginIdentifiant.this, MainActivity.class));
     }
+
 
     public void error()
     {
         // startActivity(new Intent(NFCIdentification.this, NFCIdentification.class));
     }
-
 
 }

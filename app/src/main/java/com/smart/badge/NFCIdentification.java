@@ -33,6 +33,9 @@ public class NFCIdentification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfcidentification);
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+
     }
 
 
@@ -83,6 +86,7 @@ public class NFCIdentification extends AppCompatActivity {
             error();
 
         adapters.entity.Eleve el = DataCore.GetEleveByImmatricule(id);
+        el = new adapters.entity.Eleve("BETOMBO", id, "Une personne intelligent", "656512");
         Intent intent = new Intent(NFCIdentification.this, DetailActivity.class);
         intent.putExtra("eleve", el);
 

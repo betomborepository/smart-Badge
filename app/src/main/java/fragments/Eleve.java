@@ -28,8 +28,9 @@ public class Eleve extends ListBase {
         //generating 16 profiles data ( with 5 actives)
 
 
+
         // putting the profile data to the adapter
-        eleve_vAdapter = new Eleve_VAdapter(DataCore.GetListEleve(), this.getActivity());
+        eleve_vAdapter = new Eleve_VAdapter(new DataCore().GetListEleve(this.getActivity()), this.getActivity());
 
         //attaching data from the adapter to the real recyclerview
         recyclerView.setAdapter(eleve_vAdapter);

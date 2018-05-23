@@ -22,6 +22,8 @@ import java.util.List;
 import Helpers.RecyclerItemClickListener;
 import adapters.Profile;
 import adapters.Profile_VAdapter;
+
+import adapters.entity.Eleve;
 import fragments.MainTabsFragments;
 
 public class MainActivity extends AppCompatActivity {
@@ -65,5 +67,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, NFCIdentification.class));
     }
 
-
+    public void goDetailEleve(View v)
+    {
+        Eleve el = (Eleve) v.getTag();
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("eleve", el);
+        startActivity(intent);
+    }
 }

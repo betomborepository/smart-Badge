@@ -25,4 +25,5 @@
     <string name="profile_list">Profile List</string>
     <string name="title_activity_nfcidentification">NFCIdentification</string>
     <string name="title_activity_nfcpointer">NFCPointer</string>
+    <string name="title_activity_nfclogin_identifiant">NFCLoginIdentifiant</string>
 </resources>
