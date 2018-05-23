@@ -1,18 +1,22 @@
 package service;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+import adapters.Eleve_VAdapter;
 import adapters.entity.Eleve;
 import adapters.entity.Pointage;
 
@@ -25,22 +29,29 @@ public  class DataCore
     private DatabaseReference mDatabase;
 // ...
 
-    public  List<Eleve> GetListEleve()
+    public  List<Eleve> GetListEleve(final Activity a,final RecyclerView recyclerView)
     {
         final List<Eleve>  listEleve = new ArrayList<Eleve>() ;
-        mDatabase = FirebaseDatabase.getInstance().getReference("eleves").child("listeleve");
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        mDatabase = db.getReference("eleves");
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Log.d("RealTimeDatabase", "Value is 1: " +  dataSnapshot.getValue());
+                 Log.d("RealTimeDatabase", "Value is 1: ");
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Eleve e = postSnapshot.getValue(Eleve.class);
 
                     listEleve.add(e);
+                    Log.d("eleve",e.name);
 
                 }
+                Eleve_VAdapter eleve_vAdapter = new Eleve_VAdapter(listEleve, a);
+
+                //attaching data from the adapter to the real recyclerview
+                recyclerView.setAdapter(eleve_vAdapter);
 
                 //  ProductAdapter productAdapter = new ProductAdapter(activity, productList);
                 //recyclerView.setAdapter(productAdapter);
