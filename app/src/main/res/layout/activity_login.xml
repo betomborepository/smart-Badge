@@ -83,7 +83,7 @@
                 android:layout_marginTop="@dimen/large_margin"
                 android:orientation="horizontal">
 
-                é
+
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
