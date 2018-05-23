@@ -1,6 +1,13 @@
 package service;
 
 import android.graphics.Point;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +22,36 @@ import adapters.entity.Pointage;
 
 public  class DataCore
 {
-    public static List<Eleve> GetListEleve()
+    private DatabaseReference mDatabase;
+// ...
+
+    public  List<Eleve> GetListEleve()
     {
-        List<Eleve>  listEleve = new ArrayList<Eleve>() ;
-        Eleve mariot = new Eleve("BETOMBO", "Mariot", "Une personne intelligent", "077");
-        Eleve matiasy = new Eleve("RASOLOFA", "Matiasy", "Une personne intelligent", "077");
+        final List<Eleve>  listEleve = new ArrayList<Eleve>() ;
+        mDatabase = FirebaseDatabase.getInstance().getReference("eleves").child("listeleve");
+        mDatabase.addValueEventListener(new ValueEventListener() {
 
-        listEleve.add(mariot);
-        listEleve.add(matiasy);
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Log.d("RealTimeDatabase", "Value is 1: " +  dataSnapshot.getValue());
 
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Eleve e = postSnapshot.getValue(Eleve.class);
 
+                    listEleve.add(e);
+
+                }
+
+                //  ProductAdapter productAdapter = new ProductAdapter(activity, productList);
+                //recyclerView.setAdapter(productAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("RealTimeDatabase", "Failed to read value.", databaseError.toException());
+            }
+        });
         return  listEleve;
     }
 
