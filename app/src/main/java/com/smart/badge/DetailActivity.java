@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import adapters.Profile;
+import adapters.entity.Eleve;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -55,28 +57,21 @@ public class DetailActivity extends AppCompatActivity {
             }
 
         }
-
-
     }
 
-    private void initialize(Profile profile) {
+
+    private void initialize(Eleve el) {
 
         toolbar.setTitle(profile.name);
+        AppCompatTextView detail_class = findViewById();
+        AppCompatTextView detail_immatricul = findViewById()
+        AppCompatTextView detail_surName = findViewById();
+        AppCompatTextView detail_description = findViewById();
 
-        detail_name = findViewById(R.id.detail_name);
-        detail_about = findViewById(R.id.detail_about);
-        detail_active_time = findViewById(R.id.detail_active);
-
-        detail_name.setText(getResources().getString(R.string._profile_detail, profile.name));
-        detail_about.setText(getResources().getString(R.string._profile_detail, profile.about));
-
-        if (profile.isActive)
-            detail_active_time.setText(getResources().getString(R.string._profile_detail, getResources().getString(R.string.now)));
-        else
-            detail_active_time.setText(getResources().getString(R.string._profile_detail, profile.activeTime));
-
-
-
+        detail_immatricul.setText(el.immatricul);
+        detail_name.setText(el.name);
+        detail_surName.setText(el.surName);
+        detail_class.setText(el.classe);
     }
 
 }

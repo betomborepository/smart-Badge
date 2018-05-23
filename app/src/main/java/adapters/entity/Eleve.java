@@ -2,6 +2,7 @@ package adapters.entity;
 
 import android.graphics.Point;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +10,14 @@ import java.util.List;
  * Created by hp on 22/05/2018.
  */
 
-public class Eleve {
+public class Eleve implements Serializable{
     public String name;
     public  String surName;
+    public  String classe;
     public  String description;
     public  String immatricul;
     List<Pointage> listPointage;
+
 
     public Eleve(String name, String surName, String description, String immatricul)
     {

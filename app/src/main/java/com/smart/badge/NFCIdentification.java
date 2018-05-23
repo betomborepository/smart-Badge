@@ -10,6 +10,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,8 @@ import android.view.View;
 
 import java.util.Arrays;
 
+import fragments.Eleve;
+import service.DataCore;
 import service.NFCCore;
 
 public class NFCIdentification extends AppCompatActivity {
@@ -78,7 +81,12 @@ public class NFCIdentification extends AppCompatActivity {
     {
         if (id.isEmpty())
             error();
-            
+
+        adapters.entity.Eleve el = DataCore.GetEleveByImmatricule(id);
+        Intent intent = new Intent(NFCIdentification.this, DetailActivity.class);
+        intent.putExtra("eleve", el);
+
+        startActivity(intent);
 
     }
 

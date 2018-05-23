@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@id/name_line"
-            android:id="@+id/about_line"
+            android:id="@+id/detail_surname_label"
             android:layout_marginBottom="@dimen/large_margin">
 
             <android.support.v7.widget.AppCompatTextView
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@id/about_line"
+            android:layout_below="@id/detail_surname_label"
             android:id="@+id/active_line"
             android:layout_marginBottom="@dimen/large_margin">
 
@@ -88,6 +88,31 @@
                 android:text="@string/_profile_detail"
                 android:textStyle="bold"
                 android:id="@+id/detail_active"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/detail_surname_label"
+            android:id="@+id/detail_class_label"
+            android:layout_marginBottom="@dimen/large_margin">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/active_"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/_profile_detail"
+                android:textStyle="bold"
+                android:id="@+id/detail_class"/>
 
         </LinearLayout>
 

@@ -51,4 +51,10 @@ public  class DataCore
     public static boolean CanLog(String username, String password) {
         return  true;
     }
+
+
+    public static Eleve GetEleveByImmatricule(String id)
+    {
+        return new Eleve("BETOMBO", "Mariot", "On a fini le projet", "15612541");
+    }
 }
