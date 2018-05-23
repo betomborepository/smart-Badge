@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.hdev.developer.badge.DetailActivity"
+    tools:context="com.smart.badge.DetailActivity"
     tools:showIn="@layout/activity_detail">
 
     <RelativeLayout
@@ -15,12 +15,36 @@
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/medium_margin"
         >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/detail_matricul"
+            android:layout_marginBottom="@dimen/large_margin">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="matricul"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/_profile_detail"
+                android:textStyle="bold"
+                android:id="@+id/detail_matricul_value"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/name_line"
+            android:layout_below="@id/detail_matricul"
             android:layout_marginBottom="@dimen/large_margin">
 
             <android.support.v7.widget.AppCompatTextView
@@ -36,7 +60,7 @@
                 android:textSize="16sp"
                 android:text="@string/_profile_detail"
                 android:textStyle="bold"
-                android:id="@+id/detail_name"/>
+                android:id="@+id/detail_name_value"/>
 
         </LinearLayout>
 
@@ -51,7 +75,7 @@
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="@string/about_"
+                android:text="surname"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -61,7 +85,7 @@
                 android:textSize="16sp"
                 android:text="@string/_profile_detail"
                 android:textStyle="bold"
-                android:id="@+id/detail_about"/>
+                android:id="@+id/detail_surname_value"/>
 
         </LinearLayout>
 
@@ -77,7 +101,7 @@
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="@string/active_"
+                android:text="classe"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -87,34 +111,11 @@
                 android:textSize="16sp"
                 android:text="@string/_profile_detail"
                 android:textStyle="bold"
-                android:id="@+id/detail_active"/>
+                android:id="@+id/detail_class_value"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/detail_surname_label"
-            android:id="@+id/detail_class_label"
-            android:layout_marginBottom="@dimen/large_margin">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:text="@string/active_"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/_profile_detail"
-                android:textStyle="bold"
-                android:id="@+id/detail_class"/>
-
-        </LinearLayout>
 
 
     </RelativeLayout>

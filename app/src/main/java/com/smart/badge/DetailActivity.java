@@ -40,15 +40,8 @@ public class DetailActivity extends AppCompatActivity {
         if (bundle != null){
 
             try {
-                profile = new Profile(
-                        bundle.getInt("id"),
-                        bundle.getString("name"),
-                        bundle.getString("about"),
-                        bundle.getString("time"),
-                        bundle.getBoolean("isActive")
-                );
-
-                initialize(profile);
+                Eleve el = (Eleve) getIntent().getSerializableExtra("eleve");
+                initialize(el);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -62,11 +55,13 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initialize(Eleve el) {
 
-        toolbar.setTitle(profile.name);
-        AppCompatTextView detail_class = findViewById();
-        AppCompatTextView detail_immatricul = findViewById()
-        AppCompatTextView detail_surName = findViewById();
-        AppCompatTextView detail_description = findViewById();
+        toolbar.setTitle(el.shortDescription());
+        AppCompatTextView detail_class = findViewById(R.id.detail_class_value);
+        AppCompatTextView detail_immatricul = findViewById(R.id.detail_matricul_value);
+        AppCompatTextView detail_surName = findViewById(R.id.detail_surname_value);
+         detail_name = findViewById(R.id.detail_name_value);
+
+        //AppCompatTextView detail_description = findViewById(R.id.det);
 
         detail_immatricul.setText(el.immatricul);
         detail_name.setText(el.name);
