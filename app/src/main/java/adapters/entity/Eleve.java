@@ -18,7 +18,9 @@ public class Eleve implements Serializable{
     public  String immatricul;
     List<Pointage> listPointage;
 
+    public Eleve(){
 
+    }
     public Eleve(String name, String surName, String description, String immatricul)
     {
         this.name = name;

@@ -91,8 +91,39 @@ public  class DataCore
     }
 
 
-    public static Eleve GetEleveByImmatricule(String id)
+    public Eleve GetEleveByImmatricule(final String id)
     {
-        return new Eleve("BETOMBO", "Mariot", "On a fini le projet", "15612541");
+        final List<Eleve>  listEleve = new ArrayList<Eleve>() ;
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        mDatabase = db.getReference("eleves");
+        Eleve r = new Eleve() ;
+        mDatabase.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("RealTimeDatabase", "Value is 1: ");
+                Eleve retour =new Eleve();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Eleve e = postSnapshot.getValue(Eleve.class);
+
+                    listEleve.add(e);
+                    Log.d("eleve",e.name);
+                    if(e.immatricul.equals(id)){
+                        retour = e;
+                    }
+                }
+                Log.d("detected name",retour.name);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("RealTimeDatabase", "Failed to read value.", databaseError.toException());
+            }
+        });
+        //return  listEleve;
+        //return new Eleve("BETOMBO", "Mariot", "On a fini le projet", "15612541");
+        return r;
     }
 }
