@@ -23,4 +23,6 @@
     <string name="active_">Active</string>
     <string name="now">Now</string>
     <string name="profile_list">Profile List</string>
+    <string name="title_activity_nfcidentification">NFCIdentification</string>
+    <string name="title_activity_nfcpointer">NFCPointer</string>
 </resources>

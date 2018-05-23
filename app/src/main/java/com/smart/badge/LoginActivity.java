@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.smart.badge.R;
 
+import service.DataCore;
+
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -72,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage(getResources().getString(R.string.wait));
         progressDialog.setIndeterminate(true);
         progressDialog.setCanceledOnTouchOutside(false);
+
+        final boolean   canLog = DataCore.CanLog(username, password);
         progressDialog.show();
 
         //waiting for 3sec before running this process
@@ -79,8 +83,27 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressDialog.dismiss();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                if(canLog)
+                {
+                    GoTomainPage();
+                }else {
+                    Error();
+                }
+
             }
         }, 3000);
+    }
+
+    private void  GoTomainPage()
+    {
+
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    }
+
+
+    private void Error()
+    {
+        Toast.makeText(getApplicationContext(), "Mot de passe ou compte erroné!",
+                Toast.LENGTH_SHORT).show();
     }
 }

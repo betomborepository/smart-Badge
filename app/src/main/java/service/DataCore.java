@@ -48,6 +48,7 @@ public  class DataCore
     }
 
 
-
-
+    public static boolean CanLog(String username, String password) {
+        return  true;
+    }
 }

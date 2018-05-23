@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar tb = findViewById(R.id.toolbar);
-        tb.setTitle(getResources().getString(R.string.app_name));
+        tb.setTitle("Smart Badge");
         tb.setTitleTextColor(Color.parseColor("#FFFFFF"));
 
 
@@ -54,8 +54,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void pointer(View v)
+    {
+        startActivity(new Intent(MainActivity.this, NFCPointer.class));
+    }
 
 
+    public void identifier (View v)
+    {
+        startActivity(new Intent(MainActivity.this, NFCIdentification.class));
+    }
 
 
 }
