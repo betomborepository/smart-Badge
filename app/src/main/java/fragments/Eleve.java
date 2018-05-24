@@ -26,11 +26,6 @@ public class Eleve extends ListBase {
     @Override
     protected void refresh_list() {
 
-        //generating 16 profiles data ( with 5 actives)
-
-
-
-        // putting the profile data to the adapter
         Activity a = this.getActivity();
 
         new DataCore().GetListEleve(a,recyclerView);

@@ -43,7 +43,9 @@ public class Eleve_VAdapter extends RecyclerView.Adapter<Eleve_VHolder>
 
         holder.itemView.setTag(el);
         holder.eleve_name.setText(el.getListName());
+        holder.eleve_name.setTag(el);
         holder.eleve_detail.setText(el.shortDescription());
+        holder.eleve_detail.setTag(el);
         holder.eleve_name.setTag(el);
         // populate the view holder
     }

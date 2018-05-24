@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goDetailEleve(View v)
     {
-        Eleve el = (Eleve) v.getTag();
+        Eleve el = (Eleve) v.findViewById(R.id.detail).getTag();
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("eleve", el);
         startActivity(intent);

@@ -57,6 +57,7 @@
                 android:padding="@dimen/medium_margin"
                 android:text="Forgot you password? Scan your bdge"
                 android:textAlignment="center"
+                android:onClick="goToLoginIdenitifiant"
                 android:textColor="@color/colorPrimary" />
 
 

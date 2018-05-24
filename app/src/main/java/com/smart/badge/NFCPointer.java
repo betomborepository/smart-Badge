@@ -14,8 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
+
+import adapters.entity.Eleve;
 import adapters.entity.Pointage;
+import adapters.entity.User;
 import service.DataCore;
 import service.NFCCore;
 
@@ -24,6 +35,8 @@ public class NFCPointer extends AppCompatActivity {
 
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,33 +86,47 @@ public class NFCPointer extends AppCompatActivity {
         {
             //Méthode qui va traiter le tag NFC
             Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
-            String nfcVal = NFCCore.getNFCFirstRecordValue(intent);
+            List<String> nfcVal = NFCCore.getNFCRecordList(intent);
 
             pointerUnEleve(nfcVal);
         }
     }
 
-    public void pointerUnEleve(String id)
+    public void pointerUnEleve(final List<String> listId)
     {
-        if (id.isEmpty())
-            error();
+       //adapters.entity.Eleve el = DataCore.GetEleveByImmatricule(id);
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        mDatabase = db.getReference("users");
+        ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Eleve eleve = postSnapshot.getValue(Eleve.class);
+                    if(listId.contains(eleve.immatricul) )
+                    {
 
-        adapters.entity.Eleve el = DataCore.GetEleveByImmatricule(id);
+                        new DataCore().updatePointageEleve(eleve);
+                        Intent intent = new Intent(NFCPointer.this, MainActivity.class);
+                        startActivity(intent);
+                        return;
+                    }
 
-        Pointage p = new Pointage("testid","poste 777", el.shortDescription(), el.immatricul );
-        DataCore.updatePointageEleve( p);
-
-        Intent intent = new Intent(NFCPointer.this, MainActivity.class);
-
-        startActivity(intent);
+                    errorPointage();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.wtf("une erreur dans firebase a été signalé", "une erreu dans firebase a été signalé");
+            }
+        });
 
     }
 
-    public void error()
+    public void errorPointage()
     {
-        // startActivity(new Intent(NFCIdentification.this, NFCIdentification.class));
-    }
+        Toast.makeText(getApplicationContext(), "Elève non reconnu!",
+                Toast.LENGTH_SHORT).show();    }
 
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Example</string>
+    <string name="app_name">Smart Badge</string>
     <string name="splash_title">Splash Title</string>
     <string name="splash_desc">Splash Desc</string>
     <string name="important">Important</string>

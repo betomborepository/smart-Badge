@@ -5,8 +5,9 @@ package adapters.entity;
  */
 
 public class User {
-    String immatricule;
-    String nom;
-    String prenom;
+    public String immatricule;
+    public String nom;
+    public String prenom;
+    public String password;
 }
 

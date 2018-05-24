@@ -25,7 +25,7 @@ import util.TabLayout;
 public class MainTabsFragments extends Fragment {
 
     ViewPager pager;
-    MainPager_VAdapter adapter;
+    public MainPager_VAdapter adapter;
     TabLayout tabs;
     CharSequence Titles[] = {"Home", "Elève", "Pointage"};
     int Numboftabs = 3;

@@ -11,7 +11,9 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by hp on 23/05/2018.
@@ -63,5 +65,50 @@ public class NFCCore {
         return "";
 
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static List<String> getNFCRecordList(Intent intent)
+    {
+
+        List<String> list= new ArrayList<>();
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        Ndef ndef = Ndef.get(tag);
+        NdefMessage ndefMessage = ndef.getCachedNdefMessage();
+        NdefRecord[] ndefrecords = ndefMessage.getRecords();
+        for (NdefRecord ndefRecord : ndefrecords){
+            if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT))
+            {
+                int i=0;
+                String paylod="";
+                byte[] payload = ndefRecord.getPayload();
+                while (i<payload.length){
+                    paylod=paylod+payload[i];
+                    i++;
+                }
+                try {
+
+                    Log.e("read_text--------", new String(payload, "UTF16"));
+                    list.add(new String(payload, "UTF16"));
+                }
+                catch (Exception exc){
+
+                }
+            }
+        }
+
+        byte[] id =tag.getId();
+        int i=0;
+        String idstring="";
+        while (i<id.length)
+        {
+            idstring=idstring+id[i];
+            i++;
+        }
+
+        return list;
+
+    }
+
 
 }

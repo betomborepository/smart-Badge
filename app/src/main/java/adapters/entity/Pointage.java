@@ -13,24 +13,23 @@ public class Pointage {
     public String nomEleve;
     public  String IDEleve;
 
+    public Pointage()
+    {
+
+    }
+
 
     public Pointage(String id, String poste, String nomEleve, String IDEleve )
     {
         this.ID = id;
         this.poste = poste;
-        this.setDate(new Date());
+        this.date = new Date().toString();
         this.nomEleve =nomEleve;
         this.IDEleve = IDEleve;
     }
 
 
-    public String getID() {
-        return ID;
-    }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
 
     public String getPoste() {
         return poste;
@@ -42,12 +41,6 @@ public class Pointage {
 
 
 
-    public void setDate(String dateEntree) {
-        this.date = dateEntree;
-    }
-    public void setDate(Date dateEntree) {
-        this.date = dateEntree.toString();
-    }
 
     public String getDate() {
         return date;

@@ -20,6 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
+import adapters.entity.User;
 import service.DataCore;
 import service.NFCCore;
 
@@ -78,26 +81,32 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
         {
             //Méthode qui va traiter le tag NFC
             Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
-            String nfcVal = NFCCore.getNFCFirstRecordValue(intent);
+            final List<String> nfcVal = NFCCore.getNFCRecordList(intent);
 
+
+
+            //tester dans la base
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             mDatabase = db.getReference("users");
-
-            mDatabase.addValueEventListener(new ValueEventListener() {
+            ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
 
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        User user = postSnapshot.getValue(User.class);
 
+                        if(nfcVal.contains(user.immatricule))
+                        {
+                            Connecter("Admin");
+                            break;
+                        }
+                    }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    Log.wtf("une erreur dans firebase a été signalé", "une erreu dans firebase a été signalé");
                 }
             });
-
-            Connecter(nfcVal);
         }
     }
 

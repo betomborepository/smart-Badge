@@ -85,7 +85,7 @@ public class NFCIdentification extends AppCompatActivity {
         if (id.isEmpty())
             error();
 
-        adapters.entity.Eleve el = DataCore.GetEleveByImmatricule(id);
+        adapters.entity.Eleve el;
         el = new adapters.entity.Eleve("BETOMBO", id, "Une personne intelligent", "656512");
         Intent intent = new Intent(NFCIdentification.this, DetailActivity.class);
         intent.putExtra("eleve", el);

@@ -84,7 +84,7 @@ public class ListBase extends Fragment {
         recyclerView.setItemAnimator(itemAnimator);
 
         //Adding listener and action to each recyclerview card (recyclerview item)
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this.getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+        /*recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this.getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
 
@@ -95,7 +95,7 @@ public class ListBase extends Fragment {
             public void onItemLongClick(View v, int position) {
 
             }
-        }));
+        }));*/
 
         //the bottom icon, to add a new profile when it's clicked
        /* fab.setOnClickListener(new View.OnClickListener() {
