@@ -6,10 +6,12 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
+import android.nfc.tech.NdefFormatable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,6 +75,11 @@ public class NFCCore {
 
         List<String> list= new ArrayList<>();
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
+        if (tag == null)
+            return list;
+
+
         Ndef ndef = Ndef.get(tag);
         NdefMessage ndefMessage = ndef.getCachedNdefMessage();
         NdefRecord[] ndefrecords = ndefMessage.getRecords();
@@ -86,10 +93,15 @@ public class NFCCore {
                     paylod=paylod+payload[i];
                     i++;
                 }
+                byte[] message = ndefRecord.getPayload();
+                String textEncoding = ((message[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+                int languageCodeLength = message[0] & 0063;
+
                 try {
 
-                    Log.e("read_text--------", new String(payload, "UTF16"));
-                    list.add(new String(payload, "UTF16"));
+                    String textEncoded = new String(message, languageCodeLength + 1, message.length - languageCodeLength - 1, textEncoding);
+                    Log.e("read_text--------", textEncoded);
+                    list.add(textEncoded);
                 }
                 catch (Exception exc){
 
@@ -108,6 +120,112 @@ public class NFCCore {
 
         return list;
 
+    }
+
+
+    /**
+     * Create a NdefRecord from a text
+     * @param text
+     * @return
+     */
+    public NdefRecord createRecord(String text){
+        try{
+            String lang       = "en";
+            byte[] textBytes  = text.getBytes();
+            byte[] langBytes  = lang.getBytes("US-ASCII");
+            int    langLength = langBytes.length;
+            int    textLength = textBytes.length;
+            byte[] payload    = new byte[1 + langLength + textLength];
+            // set status byte (see NDEF spec for actual bits)
+            payload[0] = (byte) langLength;
+            // copy langbytes and textbytes into payload
+            System.arraycopy(langBytes, 0, payload, 1,              langLength);
+            System.arraycopy(textBytes, 0, payload, 1 + langLength, textLength);
+            NdefRecord recordNFC = new NdefRecord(NdefRecord.TNF_WELL_KNOWN,  NdefRecord.RTD_TEXT,  new byte[0], payload);
+            return recordNFC;
+
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Create an NdefMessage form a list of NdefRecord
+     * @param records
+     * @return
+     */
+
+    public NdefMessage createNdefMessage(NdefRecord[] records)
+    {
+        NdefMessage msg = new NdefMessage(records);
+        return msg;
+    }
+
+    /**
+     * Write the Message to the TAG NFC
+     * @param message
+     * @param tag
+     * @return
+     */
+    public static boolean writeTag(final NdefMessage message, final Tag tag)
+    {
+        try
+        {
+            int size = message.toByteArray().length;
+            Ndef ndef = Ndef.get(tag);
+            if (ndef == null)
+            {
+                //Tags qui nécessite un formatage ?
+                NdefFormatable format = NdefFormatable.get(tag);
+                if (format != null)
+                {
+                    try
+                    {
+                        format.connect();
+                        //Formatage et écriture du message:
+                        format.format(message);
+                        //exemple de verrouillage du tag en écriture :
+                        //formatable.formatReadOnly(message);
+                        format.close() ;
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                } else {
+                    //format == null
+                    return false;
+                }
+            } else {
+                //ndef!=null
+                ndef.connect();
+                if (!ndef.isWritable())
+                {
+                    return false;
+                }
+                if (ndef.getMaxSize() < size)
+                {
+                    return false;
+                }
+                ndef.writeNdefMessage(message);
+                ndef.close();
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public  boolean saveDataToTag(NdefRecord [] records, Intent intent){
+
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        if (tag == null)
+            return false;
+
+        NdefMessage ndefMessage = createNdefMessage(records);
+        writeTag(ndefMessage,tag);
+
+        return true;
     }
 
 

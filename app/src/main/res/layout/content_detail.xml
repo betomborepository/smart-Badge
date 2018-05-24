@@ -115,6 +115,30 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/active_line"
+            android:id="@+id/button_assign_tag"
+            android:layout_marginBottom="@dimen/large_margin">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/forgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pass"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/medium_margin"
+                android:text="Configurer une carte pour l'élève courrant"
+                android:textAlignment="center"
+                android:onClick="goToAssignEleveToTag"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+
 
 
 

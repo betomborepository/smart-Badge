@@ -47,6 +47,8 @@ public class NFCPointer extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
 
+        Toast.makeText(getApplicationContext(), "Approcher voter badge pour pointer l'élève",
+                Toast.LENGTH_SHORT).show();
     }
 
 
@@ -96,7 +98,7 @@ public class NFCPointer extends AppCompatActivity {
     {
        //adapters.entity.Eleve el = DataCore.GetEleveByImmatricule(id);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        mDatabase = db.getReference("users");
+        mDatabase = db.getReference("eleves");
         ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -107,6 +109,8 @@ public class NFCPointer extends AppCompatActivity {
                     {
 
                         new DataCore().updatePointageEleve(eleve);
+                        Toast.makeText(getApplicationContext(), "l'élève a été pointer. Verifier son heure dans la secion pointage",
+                                Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(NFCPointer.this, MainActivity.class);
                         startActivity(intent);
                         return;
@@ -126,7 +130,8 @@ public class NFCPointer extends AppCompatActivity {
     public void errorPointage()
     {
         Toast.makeText(getApplicationContext(), "Elève non reconnu!",
-                Toast.LENGTH_SHORT).show();    }
+                Toast.LENGTH_SHORT).show();
+    }
 
 
 }

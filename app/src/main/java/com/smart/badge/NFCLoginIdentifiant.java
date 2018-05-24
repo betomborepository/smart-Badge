@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,9 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
 
+
+        Toast.makeText(getApplicationContext(), "Approcher voter badge pour scanner votre identifiant",
+                Toast.LENGTH_SHORT).show();
     }
 
 
@@ -97,10 +101,13 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
 
                         if(nfcVal.contains(user.immatricule))
                         {
+                            Toast.makeText(getApplicationContext(), "Votre badge n'a été identifié. Bienvenue " + user.nom,
+                                    Toast.LENGTH_SHORT).show();
                             Connecter("Admin");
-                            break;
+                            return;
                         }
                     }
+                    error();
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -118,7 +125,12 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
 
     public void error()
     {
-        // startActivity(new Intent(NFCIdentification.this, NFCIdentification.class));
+        Toast.makeText(getApplicationContext(), "Votre badge n'a été identifié",
+                Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onBackPressed() {
+         startActivity(new Intent(NFCLoginIdentifiant.this, LoginActivity.class));
+    }
 }

@@ -73,7 +73,18 @@
         <activity
             android:name=".NFCLoginIdentifiant"
             android:label="@string/title_activity_nfclogin_identifiant"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NFCApplyTagEleve"
+            android:label="@string/title_activity_nfcapply_tag_eleve"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

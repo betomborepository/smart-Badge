@@ -1,6 +1,7 @@
 package com.smart.badge;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,8 +22,7 @@ public class DetailActivity extends AppCompatActivity {
     private AppCompatTextView detail_name, detail_about, detail_active_time;
 
     private Profile profile;
-
-
+    private Eleve currentEleve;
 
 
     @Override
@@ -41,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
 
             try {
                 Eleve el = (Eleve) getIntent().getSerializableExtra("eleve");
+                currentEleve = el;
                 initialize(el);
 
             } catch (Exception e) {
@@ -67,6 +68,14 @@ public class DetailActivity extends AppCompatActivity {
         detail_name.setText(el.name);
         detail_surName.setText(el.surName);
         detail_class.setText(el.classe);
+    }
+
+    public void goToAssignEleveToTag(View v)
+    {
+        Intent intent = new Intent(DetailActivity.this, NFCApplyTagEleve.class);
+        intent.putExtra("eleve",currentEleve);
+        startActivity(intent);
+
     }
 
 }

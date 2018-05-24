@@ -113,7 +113,7 @@ public  class DataCore
    
     void updatePointageEleve(Eleve el, Pointage p)
     {
-        // chercher ajouter le pontage dans l'élève
+            // chercher ajouter le pontage dans l'élève
         // ajouter un pointage dans le pointge genenal
     }
 
@@ -165,7 +165,8 @@ public  class DataCore
         mDatabase = db.getReference("pointages");
         String key = mDatabase.child("child").push().getKey();
         Pointage p =    new Pointage("testid","poste 777", el.shortDescription(), el.immatricul );
-        mDatabase.child("house").child(key).setValue(p);
+        mDatabase.child(key).setValue(p);
+       // mDatabase.child("house").child(key).setValue(p);
     }
 
 

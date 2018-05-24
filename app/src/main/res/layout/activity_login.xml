@@ -45,20 +45,20 @@
                 android:inputType="textPassword"
                 android:textAlignment="center" />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/forgot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/pass"
-                android:layout_centerHorizontal="true"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:padding="@dimen/medium_margin"
-                android:text="Forgot you password? Scan your bdge"
-                android:textAlignment="center"
-                android:onClick="goToLoginIdenitifiant"
-                android:textColor="@color/colorPrimary" />
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/forgot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pass"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/medium_margin"
+                    android:text="Mot de Passe Oublié? Utilisez votre badge"
+                    android:textAlignment="center"
+                    android:onClick="goToLoginIdenitifiant"
+                    android:textColor="@color/colorPrimary" />
 
 
             <android.support.v7.widget.AppCompatButton
@@ -75,34 +75,6 @@
                 android:text="@string/login"
                 android:textColor="@android:color/white" />
 
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_btn"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/large_margin"
-                android:orientation="horizontal">
-
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/medium_margin"
-                    android:paddingEnd="@dimen/no_margin"
-                    android:paddingStart="@dimen/medium_margin"
-                    android:paddingTop="@dimen/medium_margin"
-                    android:text="@string/no_account" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/medium_margin"
-                    android:text="@string/create_account"
-                    android:textColor="@color/colorPrimary" />
-
-            </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>

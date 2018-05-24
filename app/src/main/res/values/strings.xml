@@ -26,4 +26,6 @@
     <string name="title_activity_nfcidentification">NFCIdentification</string>
     <string name="title_activity_nfcpointer">NFCPointer</string>
     <string name="title_activity_nfclogin_identifiant">NFCLoginIdentifiant</string>
+    <string name="title_activity_nfcapply_tag_elev">NFCApplyTagElev</string>
+    <string name="title_activity_nfcapply_tag_eleve">NFCApplyTagEleve</string>
 </resources>

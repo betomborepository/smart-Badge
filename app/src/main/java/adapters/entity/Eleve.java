@@ -39,7 +39,7 @@ public class Eleve implements Serializable{
     {
         String listName = name + " " + surName + " " + immatricul;
         int tailleLimit = 20;
-        if(listName.length() > tailleLimit)
+        if(listName.length() >= tailleLimit)
         return listName.substring(0, tailleLimit) + "...";
 
         return  listName;
