@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "647524357999",
+    "firebase_url": "https://immo-app-b346a.firebaseio.com",
+    "project_id": "immo-app-b346a",
+    "storage_bucket": "immo-app-b346a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647524357999:android:d82303b6932ebd35",
+        "android_client_info": {
+          "package_name": "or.appimmo.betombo.appimmo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647524357999-rr38mkrfa3uehmct24k7l81gsllq2msg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwhcmF7XjMkg0-Qziydwno0D2O3kVLu2A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
