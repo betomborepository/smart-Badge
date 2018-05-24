@@ -1,5 +1,6 @@
 package fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,9 +31,8 @@ public class Eleve extends ListBase {
 
 
         // putting the profile data to the adapter
-        eleve_vAdapter = new Eleve_VAdapter(new DataCore().GetListEleve(this.getActivity()), this.getActivity());
+        Activity a = this.getActivity();
 
-        //attaching data from the adapter to the real recyclerview
-        recyclerView.setAdapter(eleve_vAdapter);
+        new DataCore().GetListEleve(a,recyclerView);
     }
 }

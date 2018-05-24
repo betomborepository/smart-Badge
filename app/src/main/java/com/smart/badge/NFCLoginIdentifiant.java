@@ -14,6 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import service.DataCore;
 import service.NFCCore;
 
@@ -22,6 +28,8 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
 
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +80,22 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
             Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
             String nfcVal = NFCCore.getNFCFirstRecordValue(intent);
 
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            mDatabase = db.getReference("users");
+
+            mDatabase.addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
 
             Connecter(nfcVal);
         }
